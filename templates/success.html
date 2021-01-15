@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>iCal user token</title>
+    </head>
+    <body>
+        <h1>User token: {{ token }}</h1>
+        <div>
+            Great, now you can set up iCal slack integration locally
+            You will need:
+            <ol>
+                <li>This token</li>
+                <li>slack-cli</li>
+                <li>ical-buddy</li>
+            </ol>
+            Lucky you, you already have step 1 complete! The rest are easily installed with <a href="https://brew.sh" target="_blank">homebrew</a>
+            <pre>
+                <code>
+    $ brew tap rockymadden/rockymadden
+    $ brew install ical-buddy rockymadden/rockymadden/slack-cli
+    $ slack-cli init # this is where you input the token from before
+                </code>
+            </pre>
+            Now just add this script to your crontab
+            <pre>
+                <code>
+    #!/usr/bin/env zsh
+
+    title=$(icalBuddy -ea -nc -iep title eventsNow)
+                    
+    if [ -z "$title" ]
+    then
+          slack status clear > /dev/null
+    else
+          slack status edit "In a meeting" :spiral_calendar_pad: > /dev/null
+                    
+          if [[ $title == *"Lunch"* ]]; then
+                 slack status edit "Out for lunch" :hamburger: > /dev/null
+              echo "Lunch break!"
+          fi
+    fi
+                </code>
+            </pre>
+            And tada! You've got iCal syncing events to slack!
+        </div>
+    </body>
+</html>
