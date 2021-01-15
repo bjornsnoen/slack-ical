@@ -40,13 +40,13 @@ def redirect():
     """ Redirect from oauth, exchanges temporoary token for real token and outputs it to the browser with instructions """
     error = request.args.get("error")
     if error:
-        return "Awww :("
+        return render_template("error.html")
 
     code = request.args.get("code")
 
     real_token: dict = exchange_for_real_token(code)
     if "error" in real_token:
-        return real_token
+        return render_template("error.html")
 
     if real_token["authed_user"]["scope"] != "users.profile:write":
         return render_template("abuse.html")
