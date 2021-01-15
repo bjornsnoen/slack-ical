@@ -6,7 +6,7 @@ from time import time
 
 import requests
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 
 load_dotenv()
 app = Flask(__name__)
@@ -34,6 +34,19 @@ def is_request_valid(request):
 
     return hmac.compare_digest(my_signature, request.headers["X-Slack-Signature"])
 
+
+@app.route("/", methods=["GET"])
+def index():
+    """ Show explanation and slack app button """
+    return render_template("index.html")
+
+
+@app.route("/robots.txt", methods=["GET"])
+def robots():
+    """ Robots file to deter crawlers """
+    r = Response(response="User-Agent: *\nDisallow: /\n", status=200, mimetype="text/plain")
+    r.headers["Content-Type"] = "text/plain; charset=utf-8"
+    return r
 
 @app.route("/redirect", methods=["GET"])
 def redirect():

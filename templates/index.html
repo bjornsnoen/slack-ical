@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>iCal for slack</title>
+</head>
+
+<body>
+    <div>
+        <h1>Slack/iCal integration</h1>
+        <p>Hi, this tool gives you a user token to link Mac iCal with slack.</p>
+
+        <p>
+            You might need this if you have
+            <ul>
+                <li>Zoom meetings</li>
+                <li>Outlook calendar</li>
+                <li>Microsoft Teams meetings</li>
+                <li>Google Calendar meetings</li>
+            </ul>
+            ... all synced to your iCal, but only two of those have slack integrations that update your status accordingly. This takes the different approach of integrating
+            your local iCal with slack, so it doesn't matter if it's a personal event or what, if it's in your calendar it <em>will</em> update your slack status.
+        </p>
+        
+        <p>
+            The only permission we require is <code>user.profile:write</code> because that's what's necessary in order to update your slack status.
+            This is necessary as Slack has deprecated the old style personal API tokens and made it impossible to generate new ones. This app literally just asks for your
+            authorization to generate the token you will get on the next page. We don't store it anywhere. The source code is freely available
+            <a href="https://github.com/bjornsnoen/slack-ical" target="_blank">on my github</a>.
+        </p>
+        <p>
+            Instructions for what to do with the token are also on the next page, but spoiler alert it includes using <a href="https://brew.sh" target="_blank">homebrew</a>
+            to install <code>ical-buddy</code> and <code>slack-cli</code> so if you don't have homebrew already you can start by installing that right away and leave it
+            running while we get that user token.
+        </p>
+    </div>
+    <a
+        href="https://slack.com/oauth/v2/authorize?client_id=1636518952019.1629541805238&scope=&user_scope=users.profile:write">
+        <img alt="Add to Slack"
+             height="40"
+             width="139"
+             src="https://platform.slack-edge.com/img/add_to_slack.png"
+             srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
+    </a>
+</body>
+
+</html>
