@@ -70,8 +70,3 @@ def exchange_for_real_token(temporary_token: str) -> str:
         },
     )
     return response.json()
-
-
-@app.route("/test", methods=["GET"])
-def test():
-    return render_template("error.html", token="testtoken")
